@@ -35,31 +35,31 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textViewUploadData"
+                android:id="@+id/textViewMobileData"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="@string/textview_item_upload_data"
+                android:text="@string/textview_item_mobile_data"
                 android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@id/textViewDownloadData"
+                app:layout_constraintEnd_toStartOf="@id/textViewWifiData"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textViewDate" />
 
             <TextView
-                android:id="@+id/textViewDownloadData"
+                android:id="@+id/textViewWifiData"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:gravity="center"
                 android:padding="10dp"
-                android:text="@string/textview_item_download_data"
+                android:text="@string/textview_item_wifi_data"
                 android:textSize="15sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/textViewUploadData"
+                app:layout_constraintStart_toEndOf="@id/textViewMobileData"
                 app:layout_constraintTop_toBottomOf="@id/textViewDate" />
 
 

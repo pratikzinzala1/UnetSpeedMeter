@@ -2,23 +2,26 @@ package com.internet.unetspeedmeter.ui.home
 
 import CustomBroadcast
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.*
 import androidx.fragment.app.Fragment
 import com.internet.unetspeedmeter.CUSTOM_BROADCAST
 import com.internet.unetspeedmeter.R
+import com.internet.unetspeedmeter.SUM_MOBILE_DOWNLOAD
+import com.internet.unetspeedmeter.SUM_MOBILE_UPLOAD
+import com.internet.unetspeedmeter.SUM_WIFI_DOWNLOAD
+import com.internet.unetspeedmeter.SUM_WIFI_UPLOAD
 import com.internet.unetspeedmeter.UNetSpeedMeterApplication
 import com.internet.unetspeedmeter.adapter.HomeAdapter
 import com.internet.unetspeedmeter.data.InternetDataItem
 import com.internet.unetspeedmeter.databinding.FragmentHomeBinding
 import com.internet.unetspeedmeter.math.kbToString
 import com.internet.unetspeedmeter.service.NotificationService
-import com.internet.unetspeedmeter.singleton.DailyDataSingleton
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -36,20 +39,24 @@ class HomeFragment : Fragment() {
 
     private val customBroadcast = object : CustomBroadcast() {
 
-        override fun onDataReceive(speedSend:String,speedReceiver: String) {
+        override fun onDataReceive(totalSpeed: String) {
             with(binding){
-                textViewInternetSpeedText.text = getString(R.string.textview_internet_speed,speedSend,speedReceiver)
+                textViewInternetSpeedText.text = getString(R.string.textview_internet_speed,totalSpeed)
                 textViewTodayUpload.text = getString(R.string.textview_today_data_sent,
-                    kbToString(DailyDataSingleton.wifiDataSend)
+                    kbToString(requireContext().getSharedPreferences("DATA", Context.MODE_PRIVATE).getLong(
+                        SUM_WIFI_UPLOAD, 0))
                 )
                 textViewTodayDownload.text = getString(R.string.textview_today_data_receive,
-                    kbToString(DailyDataSingleton.wifiDataReceived)
+                    kbToString(requireContext().getSharedPreferences("DATA", Context.MODE_PRIVATE).getLong(
+                        SUM_WIFI_DOWNLOAD, 0))
                 )
                 textViewTodayMobileUpload.text = getString(R.string.textview_today_mobile_data_sent,
-                    kbToString(DailyDataSingleton.mobileDataSend)
+                    kbToString(requireContext().getSharedPreferences("DATA", Context.MODE_PRIVATE).getLong(
+                        SUM_MOBILE_UPLOAD, 0))
                 )
                 textViewTodayMobileDownload.text = getString(R.string.textview_today_mobile_data_receive,
-                    kbToString(DailyDataSingleton.mobileDataReceived)
+                    kbToString(requireContext().getSharedPreferences("DATA", Context.MODE_PRIVATE).getLong(
+                        SUM_MOBILE_DOWNLOAD, 0))
                 )
 
             }
@@ -68,7 +75,7 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("NotifyDataSetChanged")
+    @SuppressLint("NotifyDataSetChanged", "UnspecifiedRegisterReceiverFlag")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -76,20 +83,18 @@ class HomeFragment : Fragment() {
         application = requireActivity().application as UNetSpeedMeterApplication
         adapter = HomeAdapter()
 
+
         adapter.context = requireContext()
         with(binding) {
 
             recyclerview.adapter = adapter
 
         }
-
         CoroutineScope(Dispatchers.IO).launch {
             list = application.appDataContainer.itemsRepository.getAllItemsStream()
             adapter.submitList(list)
             adapter.notifyDataSetChanged()
-
         }
-
         requireActivity().registerReceiver(customBroadcast, IntentFilter(CUSTOM_BROADCAST))
 
     }

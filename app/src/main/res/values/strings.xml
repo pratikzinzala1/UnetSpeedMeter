@@ -1,17 +1,20 @@
 <resources>
     <string name="app_name">UNetSpeedMeter</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="textview_internet_speed">Send %s/s | %s/s Receive</string>
+    <string name="textview_internet_speed">Total : %s/s</string>
     <string name="textview_today_data_sent">Upload \n %s </string>
     <string name="textview_today_data_receive">Download \n %s </string>
     <string name="textview_today_mobile_data_sent">Upload \n %s </string>
     <string name="textview_today_mobile_data_receive">Download \n %s </string>
 
 
-    <string name="textview_item_upload_data">Uploaded %s</string>
-    <string name="textview_item_download_data">Downloaded %s</string>
+    <string name="textview_item_mobile_data">Mobile %s</string>
+    <string name="textview_item_wifi_data">Wifi %s</string>
     <string name="textview_item_date">Date %s</string>
 
     <string name="textview_mobile">Mobile Data Usage</string>
     <string name="textview_wifi">Wifi Data Usage</string>
+    <string name="internet_speed">Internet Speed</string>
+
+
 </resources>

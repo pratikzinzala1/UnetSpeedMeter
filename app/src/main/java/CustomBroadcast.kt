@@ -9,10 +9,10 @@ abstract class CustomBroadcast : BroadcastReceiver() {
 
 
         if(intent!!.action == CUSTOM_BROADCAST){
-            onDataReceive(intent.getStringExtra("INTERNET_SEND")!!,intent.getStringExtra("INTERNET_RECEIVE")!!)
+            onDataReceive(intent.getStringExtra("INTERNET_TOTAL")!!)
         }
     }
 
-    abstract fun onDataReceive(speedSend:String,speedReceiver: String)
+    abstract fun onDataReceive(totalSpeed: String)
 
 }

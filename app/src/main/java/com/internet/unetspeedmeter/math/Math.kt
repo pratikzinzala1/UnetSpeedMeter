@@ -4,9 +4,11 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.net.TrafficStats
-import android.util.Log
 import com.internet.unetspeedmeter.R
-import com.internet.unetspeedmeter.singleton.DailyDataSingleton
+import com.internet.unetspeedmeter.SUM_MOBILE_DOWNLOAD
+import com.internet.unetspeedmeter.SUM_MOBILE_UPLOAD
+import com.internet.unetspeedmeter.SUM_WIFI_DOWNLOAD
+import com.internet.unetspeedmeter.SUM_WIFI_UPLOAD
 import kotlinx.coroutines.delay
 
 class Math(val context:Context) {
@@ -16,6 +18,40 @@ class Math(val context:Context) {
     suspend fun main() {
         getSpeedInternet()
     }
+
+
+    var sumDataWifiDayUpload: Long
+        get() {
+            return context.getSharedPreferences("DATA", Context.MODE_PRIVATE).getLong(
+                SUM_WIFI_UPLOAD, 0)
+        }
+        set(value) {
+            context.getSharedPreferences("DATA", Context.MODE_PRIVATE).edit().putLong(SUM_WIFI_UPLOAD, value).apply()
+        }
+    var sumDataWifiDayDownload: Long
+        get() {
+            return context.getSharedPreferences("DATA", Context.MODE_PRIVATE).getLong(
+                SUM_WIFI_DOWNLOAD, 0)
+        }
+        set(value) {
+            context.getSharedPreferences("DATA", Context.MODE_PRIVATE).edit().putLong(SUM_WIFI_DOWNLOAD, value).apply()
+        }
+    var sumDataMobileInternetDayUpload: Long
+        get() {
+            return context.getSharedPreferences("DATA", Context.MODE_PRIVATE).getLong(
+                SUM_MOBILE_UPLOAD, 0)
+        }
+        set(value) {
+            context.getSharedPreferences("DATA", Context.MODE_PRIVATE).edit().putLong(SUM_MOBILE_UPLOAD, value).apply()
+        }
+    var sumDataMobileInternetDayDownload: Long
+        get() {
+            return context.getSharedPreferences("DATA", Context.MODE_PRIVATE).getLong(
+                SUM_MOBILE_DOWNLOAD, 0)
+        }
+        set(value) {
+            context.getSharedPreferences("DATA", Context.MODE_PRIVATE).edit().putLong(SUM_MOBILE_DOWNLOAD, value).apply()
+        }
 
     //Total byte received since device booted
      private fun getTotalRxBytes(): Long = TrafficStats.getTotalRxBytes()
@@ -33,19 +69,14 @@ class Math(val context:Context) {
         speedUpLoad = getTotalTxBytes() - upLoadSpeed
 
         if(isMobileDataEnabled(context)){
-            with(DailyDataSingleton){
-                mobileDataReceived += speedDownLoad
-                mobileDataSend += speedUpLoad
-            }
+            sumDataMobileInternetDayUpload += speedUpLoad
+            sumDataMobileInternetDayDownload += speedDownLoad
         }
         else if (isWifiDataEnabled(context)){
-            with(DailyDataSingleton){
-                wifiDataSend += speedUpLoad
-                wifiDataReceived += speedDownLoad
-            }
+            sumDataWifiDayUpload += speedUpLoad
+            sumDataWifiDayDownload += speedDownLoad
         }
 
-        Log.d("AAA","${kbToString(DailyDataSingleton.mobileDataSend)} ${kbToString(DailyDataSingleton.mobileDataReceived)}")
 
     }
 

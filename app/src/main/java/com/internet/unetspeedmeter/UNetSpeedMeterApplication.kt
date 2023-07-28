@@ -13,7 +13,7 @@ class UNetSpeedMeterApplication:Application() {
     override fun onCreate() {
         super.onCreate()
         appDataContainer = AppDataContainer(applicationContext)
-        DynamicColors.applyToActivitiesIfAvailable(this)
+        //DynamicColors.applyToActivitiesIfAvailable(this)
     }
 
 }

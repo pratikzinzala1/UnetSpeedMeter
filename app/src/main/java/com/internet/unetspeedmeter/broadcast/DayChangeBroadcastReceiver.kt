@@ -19,7 +19,7 @@ abstract class DayChangedBroadcastReceiver : BroadcastReceiver() {
 
         val currentDate = Date()
 
-        if ((action == Intent.ACTION_TIME_CHANGED) && !isSameDay(
+        if ((action == Intent.ACTION_DATE_CHANGED) && !isSameDay(
                 currentDate
             )
         ) {
@@ -37,9 +37,7 @@ abstract class DayChangedBroadcastReceiver : BroadcastReceiver() {
     companion object {
 
         fun getIntentFilter() = IntentFilter().apply {
-            addAction(Intent.ACTION_TIME_TICK)
-            addAction(Intent.ACTION_TIMEZONE_CHANGED)
-            addAction(Intent.ACTION_TIME_CHANGED)
+            addAction(Intent.ACTION_DATE_CHANGED)
         }
     }
 }

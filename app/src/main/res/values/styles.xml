@@ -2,6 +2,16 @@
 <resources>
 
 
+    <style name="textTitle">
+        <item name="fontFamily">@font/js_medium</item>
+        <item name="android:textSize">40sp</item>
 
+    </style>
+
+    <style name="textBody">
+        <item name="android:textStyle">normal</item>
+        <item name="fontFamily">@font/js_light</item>
+        <item name="android:textSize">20sp</item>
+    </style>
 
 </resources>

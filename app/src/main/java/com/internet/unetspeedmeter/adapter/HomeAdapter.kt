@@ -26,8 +26,8 @@ class HomeAdapter : ListAdapter<InternetDataItem, HomeAdapter.HomeViewHolder>(Di
         fun bind(itemModel: InternetDataItem) {
 
             binding.textViewDate.text =  context.getString(R.string.textview_item_date,itemModel.time)
-            binding.textViewDownloadData.text = context.getString(R.string.textview_item_download_data,kbToString(itemModel.byteReceived))
-            binding.textViewUploadData.text = context.getString(R.string.textview_item_upload_data,kbToString(itemModel.byteSend))
+            binding.textViewMobileData.text = context.getString(R.string.textview_item_mobile_data,kbToString(itemModel.byteSendMobile + itemModel.byteReceivedMobile))
+            binding.textViewWifiData.text = context.getString(R.string.textview_item_wifi_data,kbToString(itemModel.byteSendWifi + itemModel.byteReceivedWifi))
 
 
         }

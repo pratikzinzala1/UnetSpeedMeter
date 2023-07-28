@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "913592455614",
+    "project_id": "unetspeedmeter",
+    "storage_bucket": "unetspeedmeter.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:913592455614:android:0ca097c6f6e9b3078ba9ef",
+        "android_client_info": {
+          "package_name": "com.internet.unetspeedmeter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "913592455614-78g3mdaqnpi3kooahicagvlmo8hiiev9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF4WZiFtzVE0TGQM-UEZ7RmcPhbL5N8Mk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "913592455614-78g3mdaqnpi3kooahicagvlmo8hiiev9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

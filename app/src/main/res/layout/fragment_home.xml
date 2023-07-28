@@ -16,7 +16,6 @@
             android:id="@+id/top_card"
             android:layout_width="0dp"
             android:layout_height="400dp"
-            android:layout_margin="10dp"
             app:cardCornerRadius="10dp"
             app:cardElevation="8dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -28,28 +27,39 @@
                 android:layout_height="match_parent">
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/textViewInternetSpeedText"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
+                    android:id="@+id/textView1"
+                    style="@style/textBody"
+                    android:layout_margin="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/textview_internet_speed"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:fontFamily="@font/slatelight"
-                    app:layout_constraintBottom_toTopOf="@id/textViewWifi"
+                    android:text="@string/internet_speed"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/textViewInternetSpeedText"
+                    style="@style/textTitle"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:gravity="center_vertical"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="0dp"
+                    android:text="@string/textview_internet_speed"
+                    app:layout_constraintBottom_toTopOf="@id/textViewWifi"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/textView1" />
+
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textViewWifi"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="0dp"
                     android:text="@string/textview_wifi"
+                    android:textSize="20sp"
                     app:layout_constraintBottom_toTopOf="@id/textViewTodayUpload"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -57,11 +67,11 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textViewTodayUpload"
+                    style="@style/textBody"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:gravity="center"
                     android:text="@string/textview_today_data_sent"
-                    android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@id/textViewMobile"
                     app:layout_constraintEnd_toStartOf="@id/textViewTodayDownload"
                     app:layout_constraintStart_toStartOf="parent"
@@ -70,11 +80,11 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textViewTodayDownload"
+                    style="@style/textBody"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:gravity="center"
                     android:text="@string/textview_today_data_receive"
-                    android:textStyle="bold"
                     app:layout_constraintBottom_toTopOf="@id/textViewMobile"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/textViewTodayUpload"
@@ -84,11 +94,10 @@
                     android:id="@+id/textViewMobile"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:paddingStart="10dp"
-                    android:paddingEnd="10dp"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
+                    android:paddingStart="20dp"
+                    android:paddingEnd="0dp"
                     android:text="@string/textview_mobile"
+                    android:textSize="20sp"
                     app:layout_constraintBottom_toTopOf="@id/textViewTodayMobileDownload"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -96,11 +105,12 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textViewTodayMobileUpload"
+                    style="@style/textBody"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:gravity="center"
                     android:text="@string/textview_today_data_sent"
-                    android:textStyle="bold"
+
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/textViewTodayDownload"
                     app:layout_constraintStart_toStartOf="parent"
@@ -108,11 +118,11 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/textViewTodayMobileDownload"
+                    style="@style/textBody"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:gravity="center"
                     android:text="@string/textview_today_data_receive"
-                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/textViewTodayUpload"
