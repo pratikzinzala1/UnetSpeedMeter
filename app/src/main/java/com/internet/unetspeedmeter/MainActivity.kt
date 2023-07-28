@@ -1,10 +1,10 @@
 package com.internet.unetspeedmeter
 
-import android.content.pm.ActivityInfo
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.ads.MobileAds
 import com.internet.unetspeedmeter.databinding.ActivityMainBinding
-import com.internet.unetspeedmeter.databinding.FragmentHomeBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,6 +13,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        MobileAds.initialize(this) {
+            Log.d("AAA","ADMOB $it")
+        }
     }
 }

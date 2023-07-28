@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.google.android.gms.ads.AdRequest
 import com.internet.unetspeedmeter.CUSTOM_BROADCAST
 import com.internet.unetspeedmeter.R
 import com.internet.unetspeedmeter.SUM_MOBILE_DOWNLOAD
@@ -90,13 +91,22 @@ class HomeFragment : Fragment() {
             recyclerview.adapter = adapter
 
         }
+
+        requireActivity().registerReceiver(customBroadcast, IntentFilter(CUSTOM_BROADCAST))
+
+
+        val adRequest = AdRequest.Builder().build()
+        binding.adView.loadAd(adRequest)
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    override fun onResume() {
+        super.onResume()
         CoroutineScope(Dispatchers.IO).launch {
             list = application.appDataContainer.itemsRepository.getAllItemsStream()
             adapter.submitList(list)
             adapter.notifyDataSetChanged()
         }
-        requireActivity().registerReceiver(customBroadcast, IntentFilter(CUSTOM_BROADCAST))
-
     }
 
     override fun onDestroy() {

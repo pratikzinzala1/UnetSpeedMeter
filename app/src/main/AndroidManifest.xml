@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
 
     <application
         android:name=".UNetSpeedMeterApplication"
@@ -19,6 +20,10 @@
         android:theme="@style/Theme.UNetSpeedMeter"
         tools:targetApi="31">
 
+        <!-- ca-app-pub-7762965447750871/4613589581-->
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-3940256099942544~3347511713"/>
 
         <service android:name=".service.NotificationService" />
 
