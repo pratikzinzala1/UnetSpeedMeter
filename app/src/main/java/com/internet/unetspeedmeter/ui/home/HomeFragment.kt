@@ -23,6 +23,7 @@ import com.internet.unetspeedmeter.data.InternetDataItem
 import com.internet.unetspeedmeter.databinding.FragmentHomeBinding
 import com.internet.unetspeedmeter.math.kbToString
 import com.internet.unetspeedmeter.service.NotificationService
+import com.robinhood.ticker.TickerUtils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -38,34 +39,7 @@ class HomeFragment : Fragment() {
     private lateinit var list: List<InternetDataItem>
     private lateinit var adapter:HomeAdapter
 
-    private val customBroadcast = object : CustomBroadcast() {
-
-        override fun onDataReceive(totalSpeed: String) {
-            with(binding){
-                textViewInternetSpeedText.text = getString(R.string.textview_internet_speed,totalSpeed)
-                textViewTodayUpload.text = getString(R.string.textview_today_data_sent,
-                    kbToString(requireContext().getSharedPreferences("DATA", Context.MODE_PRIVATE).getLong(
-                        SUM_WIFI_UPLOAD, 0))
-                )
-                textViewTodayDownload.text = getString(R.string.textview_today_data_receive,
-                    kbToString(requireContext().getSharedPreferences("DATA", Context.MODE_PRIVATE).getLong(
-                        SUM_WIFI_DOWNLOAD, 0))
-                )
-                textViewTodayMobileUpload.text = getString(R.string.textview_today_mobile_data_sent,
-                    kbToString(requireContext().getSharedPreferences("DATA", Context.MODE_PRIVATE).getLong(
-                        SUM_MOBILE_UPLOAD, 0))
-                )
-                textViewTodayMobileDownload.text = getString(R.string.textview_today_mobile_data_receive,
-                    kbToString(requireContext().getSharedPreferences("DATA", Context.MODE_PRIVATE).getLong(
-                        SUM_MOBILE_DOWNLOAD, 0))
-                )
-
-            }
-
-
-        }
-
-    }
+    lateinit var customBroadcast:CustomBroadcast
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -91,6 +65,35 @@ class HomeFragment : Fragment() {
             recyclerview.adapter = adapter
 
         }
+        customBroadcast = object : CustomBroadcast() {
+
+            override fun onDataReceive(totalSpeed: String) {
+                with(binding){
+                    tickerView.setCharacterLists(TickerUtils.provideNumberList())
+                    tickerView.text =  getString(R.string.textview_internet_speed,totalSpeed)
+                    textViewTodayUpload.text = getString(R.string.textview_today_data_sent,
+                        kbToString(requireContext().getSharedPreferences("DATA", Context.MODE_PRIVATE).getLong(
+                            SUM_WIFI_UPLOAD, 0))
+                    )
+                    textViewTodayDownload.text = getString(R.string.textview_today_data_receive,
+                        kbToString(requireContext().getSharedPreferences("DATA", Context.MODE_PRIVATE).getLong(
+                            SUM_WIFI_DOWNLOAD, 0))
+                    )
+                    textViewTodayMobileUpload.text = getString(R.string.textview_today_mobile_data_sent,
+                        kbToString(requireContext().getSharedPreferences("DATA", Context.MODE_PRIVATE).getLong(
+                            SUM_MOBILE_UPLOAD, 0))
+                    )
+                    textViewTodayMobileDownload.text = getString(R.string.textview_today_mobile_data_receive,
+                        kbToString(requireContext().getSharedPreferences("DATA", Context.MODE_PRIVATE).getLong(
+                            SUM_MOBILE_DOWNLOAD, 0))
+                    )
+
+                }
+
+
+            }
+
+        }
 
         requireActivity().registerReceiver(customBroadcast, IntentFilter(CUSTOM_BROADCAST))
 
@@ -113,6 +116,7 @@ class HomeFragment : Fragment() {
         super.onDestroy()
 
         requireActivity().unregisterReceiver(customBroadcast)
+
 
         _binding = null
     }
